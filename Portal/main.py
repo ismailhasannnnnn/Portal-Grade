@@ -21,10 +21,10 @@ import pandas as pd
 class Login(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
-        self.label = tk.Label(self, text="Please enter your Student Portal Login Details")
+        self.label = tk.Label(self, text="Enter Student Portal Login Details", height=3)
         self.entry = tk.Entry(self)
-        self.entry2 = tk.Entry(self, show="*")
-        self.button = tk.Button(self, text="Login", command=self.on_button)
+        self.entry2 = tk.Entry(self, show="#")
+        self.button = tk.Button(self, text="Login", command=self.on_button, pady=10)
         self.label.pack()
         self.entry.pack()
         self.entry2.pack()
@@ -40,6 +40,9 @@ class Login(tk.Tk):
 
 
 login = Login()
+login.title("Student Portal")
+x = Frame(height=250, width=300)
+x.pack()
 login.mainloop()
 
 clear = lambda: os.system('cls')
