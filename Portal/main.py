@@ -3,6 +3,8 @@ from selenium import webdriver
 import os
 import time
 import csv
+import tkinter as tk
+from tkinter import *
 from selenium.webdriver.common.keys import Keys
 from tabula import read_pdf
 import pandas as pd
