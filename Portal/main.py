@@ -9,9 +9,34 @@ from selenium.webdriver.common.keys import Keys
 from tabula import read_pdf
 import pandas as pd
 
+# top = Tk()
+# L1 = Label(top, text="ID Number")
+# L1.pack( side = LEFT)
+# E1 = Entry(top, bd =5)
+# E1.pack(side = RIGHT)
+#
+# top.mainloop()
 
-id = input('Please input your ID number: ')
-loginPass = input("And your password: ")
+class Login(tk.Tk):
+    def __init__(self):
+        tk.Tk.__init__(self)
+        self.entry = tk.Entry(self)
+        self.entry2 = tk.Entry(self)
+        self.button = tk.Button(self, text="Get", command=self.on_button)
+        self.button.pack()
+        self.entry.pack()
+        self.entry2.pack()
+
+    def on_button(self):
+        global id
+        global loginPass
+        id = self.entry.get()
+        loginPass = self.entry2.get()
+
+
+login = Login()
+login.mainloop()
+
 clear = lambda: os.system('cls')
 os.system("cls")
 print("Please wait....")
@@ -30,12 +55,12 @@ password.send_keys(loginPass)
 login = browser.find_element_by_id('LoginButton')
 login.click()
 
-time.sleep(3)
+time.sleep(1)
 
 td = browser.find_element_by_class_name('sturow')
 td.click()
 
-time.sleep(2)
+time.sleep(1)
 
 # if(browser.find_element_by_xpath("//*[@id='chk_Assignments']").is_enabled()){
 # print(browser.find_element_by_xpath("//*[@id='chk_Assignments']").is_selected())
