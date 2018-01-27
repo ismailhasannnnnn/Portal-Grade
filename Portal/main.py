@@ -16,29 +16,27 @@ class Login(tk.Tk):
         self.entry = tk.Entry(self)
         self.entry2 = tk.Entry(self, show="#")
         self.button = tk.Button(self, text="Login", command=self.on_button, pady=10)
-        self.entry = Login()
-        self.entry2 = Login()
-        self.button = Login()
+        self.bind('<Return>', self.on_button)
         self.label.pack()
         self.entry.pack()
         self.entry2.pack()
         self.button.pack()
 
-    def on_button(self, event="None"):
+    def on_button(self, event=None):
         global id
         global loginPass
         id = self.entry.get()
         loginPass = self.entry2.get()
         login.destroy()
 
-    def enterKey(self):
-        Login.on_button()
+    def enter_key(self):
+        self.on_button()
+
 
 login = Login()
 login.title("Student Portal")
 x = Frame(height=250, width=300)
 x.pack()
-login.bind('<Return>', Login.on_button)
 login.mainloop()
 
 clear = lambda: os.system('cls')
