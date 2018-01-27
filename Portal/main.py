@@ -4,6 +4,7 @@ import os
 import time
 import csv
 import tkinter as tk
+import getpass
 from tkinter import *
 from selenium.webdriver.common.keys import Keys
 from tabula import read_pdf
@@ -20,18 +21,22 @@ import pandas as pd
 class Login(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
+        self.label = tk.Label(self, text="Please enter your Student Portal Login Details")
         self.entry = tk.Entry(self)
-        self.entry2 = tk.Entry(self)
-        self.button = tk.Button(self, text="Get", command=self.on_button)
-        self.button.pack()
+        self.entry2 = tk.Entry(self, show="*")
+        self.button = tk.Button(self, text="Login", command=self.on_button)
+        self.label.pack()
         self.entry.pack()
         self.entry2.pack()
+        self.button.pack()
+
 
     def on_button(self):
         global id
         global loginPass
         id = self.entry.get()
         loginPass = self.entry2.get()
+        login.destroy()
 
 
 login = Login()
