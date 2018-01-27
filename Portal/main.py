@@ -8,8 +8,8 @@ from tabula import read_pdf
 import pandas as pd
 
 
-id = raw_input('Please input your ID number: ')
-loginPass = raw_input("And your password: ")
+id = input('Please input your ID number: ')
+loginPass = input("And your password: ")
 clear = lambda: os.system('cls')
 os.system("cls")
 print("Please wait....")
@@ -42,6 +42,8 @@ if browser.find_element_by_xpath("//*[@id='chk_Assignments']").is_selected() == 
 
 time.sleep(1)
 
+# Table 1
+
 period1 = browser.find_element_by_xpath("//*[@id='tblassign_1']/tbody")
 # for tr in period1.find_elements_by_tag_name('tr'):
 #     with open("output.csv", "wb") as csvFile:
@@ -53,12 +55,51 @@ for tr in period1.find_elements_by_tag_name('td'):
     periodOneElements.append(tr.text)
 
 
-with open("output.csv", 'w') as resultFile:
+with open("period 1.csv", 'w') as resultFile:
     writer = csv.writer(resultFile, dialect='excel', delimiter=' ')
     writer.writerows(periodOneElements)
 
 time.sleep(5)
-df = pd.read_csv('"C:\Users\ismailhasan\Documents\Portal Grade\Portal\output.csv"')
+
+# Table 2
+
+period2 = browser.find_element_by_xpath("//*[@id='tblassign_2']/tbody")
+periodTwoElements = []
+
+for tr in period2.find_elements_by_tag_name('td'):
+    periodTwoElements.append(tr.text)
+
+with open("period_2.csv", "w") as resultFile:
+    writer = csv.writer(resultFile, dialect='excel', delimiter=' ')
+    writer.writerows(periodTwoElements)
+
+time.sleep(5)
+
+# Table 3
+
+period3 = browser.find_element_by_xpath("//*[@id='tblassign_3']/tbody")
+periodThreeElements = []
+
+for tr in period3.find_elements_by_tag_name('td'):
+    periodTwoElements.append(tr.text)
+
+with open("period_3.csv", "w") as resultFile:
+    writer = csv.writer(resultFile, dialect='excel', delimiter=' ')
+    writer.writerows(periodThreeElements)
+
+time.sleep(5)
+
+# Table 5
+
+period5 = browser.find_element_by_xpath("//*[@id='tblassign_4']/tbody")
+periodFiveElements = []
+
+for tr in period5.find_elements_by_tag_name('td'):
+    periodFiveElements.append(tr.text)
+
+with open("period_5.csv", "w") as resultFile:
+    writer = csv.writer(resultFile, dialect='excel', delimiter=' ')
+    writer.writerows(periodFiveElements)
 
 
 
