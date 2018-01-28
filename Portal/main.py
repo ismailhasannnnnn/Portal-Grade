@@ -11,6 +11,7 @@ from tabula import read_pdf
 import pandas as pd
 from itertools import islice
 from pathlib import Path
+import pyautogui
 
 
 class Login(tk.Tk):
@@ -114,7 +115,7 @@ time.sleep(1)
 report = browser.find_element_by_xpath("//*[@id='tbltermlist']/tbody/tr[4]/td[5]")
 report.click()
 
-time.sleep(2)
+time.sleep(1)
 
 for handle in browser.window_handles:
     browser.switch_to.window(handle)
@@ -126,11 +127,21 @@ saveas = ActionChains(browser).key_down(Keys.CONTROL)\
          .send_keys('s').key_up(Keys.CONTROL)
 saveas.perform()
 
-time.sleep(4)
+time.sleep(1)
 
 save = ActionChains(browser).key_down(Keys.RETURN)\
     .key_up(Keys.RETURN)
 save.perform()
+
+time.sleep(1)
+
+pyautogui.dragRel(-200, -500, button='right')
+pyautogui.dragRel(-10, 0, button='left')
+pyautogui.click()
+pyautogui.typewrite('Documents')
+pyautogui.hotkey('return')
+pyautogui.dragRel(200, 500, button='right')
+pyautogui.click()
 
 
 
