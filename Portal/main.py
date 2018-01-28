@@ -15,7 +15,7 @@ class Login(tk.Tk):
         self.label = tk.Label(self, text="Enter Student Portal Login Details", height=3)
         self.entry = tk.Entry(self)
         self.entry2 = tk.Entry(self, show="#")
-        self.button = tk.Button(self, text="Login", command=self.on_button, pady=10)
+        self.button = tk.Button(self, text="Login", command=self.on_button, pady=10, padx=10)
         self.bind('<Return>', self.on_button)
         self.label.pack()
         self.entry.pack()
@@ -71,6 +71,15 @@ if browser.find_element_by_xpath("//*[@id='chk_Assignments']").is_selected() == 
 
 time.sleep(1)
 
+printer = browser.find_element_by_xpath("//*[@id='tblassign_1']/thead/tr[2]/td/a/img")
+printer.click()
+
+time.sleep(1)
+
+report = browser.find_element_by_xpath("//*[@id='tbltermlist']/tbody/tr[4]/td[5]")
+report.click()
+
+time.sleep(1)
 # Table 1
 
 period1 = browser.find_element_by_xpath("//*[@id='tblassign_1']/tbody")
@@ -83,8 +92,8 @@ periodOneElements = []
 for tr in period1.find_elements_by_tag_name('td'):
     periodOneElements.append(tr.text)
 
-
-with open("period 1.csv", 'w') as resultFile:
+# no you
+with open("period_1.csv", 'w') as resultFile:
     writer = csv.writer(resultFile, dialect='excel', delimiter=' ')
     writer.writerows(periodOneElements)
 
