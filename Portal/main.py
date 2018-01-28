@@ -135,21 +135,11 @@ save.perform()
 
 time.sleep(1)
 
-pyautogui.dragRel(-200, -500, button='right')
-pyautogui.dragRel(-10, 0, button='left')
-pyautogui.click()
+pyautogui.hotkey('f4')
+pyautogui.hotkey('ctrl', 'a')
 pyautogui.typewrite('Documents')
 pyautogui.hotkey('return')
-pyautogui.dragRel(200, 500, button='right')
-pyautogui.click()
-
-
-
-
-
-
-
-
+pyautogui.hotkey('alt', 's')
 
 
 # # Table 1
