@@ -13,7 +13,6 @@ from itertools import islice
 from pathlib import Path
 import pyautogui
 
-
 class Login(tk.Tk):
     def __init__(self):
         global id
@@ -100,6 +99,11 @@ td.click()
 
 time.sleep(1)
 
+if browser.find_element_by_xpath('//*[@id="Assignments"]/td[2]').is_enabled() == True:
+    browser.find_element_by_xpath('//*[@id="Assignments"]/td[2]').click()
+
+time.sleep(1)
+
 # if(browser.find_element_by_xpath("//*[@id='chk_Assignments']").is_enabled()){
 # print(browser.find_element_by_xpath("//*[@id='chk_Assignments']").is_selected())
 if browser.find_element_by_xpath("//*[@id='chk_Assignments']").is_selected() == False:
@@ -129,18 +133,20 @@ saveas.perform()
 
 time.sleep(1)
 
-save = ActionChains(browser).key_down(Keys.RETURN)\
-    .key_up(Keys.RETURN)
-save.perform()
-
+pyautogui.typewrite('period1')
 time.sleep(1)
-
 pyautogui.hotkey('f4')
 pyautogui.hotkey('ctrl', 'a')
 pyautogui.typewrite('Documents')
 pyautogui.hotkey('return')
+time.sleep(1)
 pyautogui.hotkey('alt', 's')
-
+time.sleep(1)
+pyautogui.hotkey('alt', 'y')
+time.sleep(3)
+pyautogui.hotkey('ctrl', 'w')
+pyautogui.hotkey('ctrl', 'w')
+os.system('taskkill /F /IM chromedriver.exe')
 
 # # Table 1
 #
