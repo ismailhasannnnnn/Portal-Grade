@@ -2,21 +2,24 @@ import selenium
 from selenium import webdriver
 import os
 import time
+import tabula
 import csv
 import tkinter as tk
 from tkinter import *
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from tabula import read_pdf
-import pandas as pd
 from itertools import islice
 from pathlib import Path
+
+import pandas
 import pyautogui
 
 class Login(tk.Tk):
     def __init__(self):
         global id
         global loginPass
+        global period
         loginFile = Path('loginFile.txt')
         if loginFile.is_file() == False:
             f = open('loginFile.txt', "w")
@@ -32,6 +35,8 @@ class Login(tk.Tk):
         self.entry.insert(0, id)
         self.entry2 = tk.Entry(self, show="#", background="#AFAFAF", font=("Yu Gothic Light", 12))
         self.entry2.insert(0, loginPass)
+        self.entry3 = tk.Entry(self, background="#AFAFAF", font=("Yu Gothic Light", 12))
+        self.label2 = tk.Label(self, text="Insert Period", height=1, font=("Yu Gothic Light", 12), background="#6f6f6f")
         self.button = tk.Button(self, text="Login", command=self.on_button, pady=0, padx=15, background="#AFAFAF", font=("Yu Gothic Light", 12))
         self.loginElements = []
         self.bind('<Return>', self.on_button)
@@ -44,15 +49,19 @@ class Login(tk.Tk):
         # self.saveSettings.pack()
         self.label.grid(row=0, column=0)
         self.entry.grid(row=1, column=0, pady=10)
-        self.entry2.grid(row=2, column=0)
-        self.button.grid(row=3, column=0, pady=10)
-        self.saveSettings.grid(row=4, column=0)
+        self.entry2.grid(row=2, column=0, pady=10)
+        self.label2.grid(row=3, column=0)
+        self.entry3.grid(row=4, column=0)
+        self.button.grid(row=5, column=0, pady=10)
+        self.saveSettings.grid(row=6, column=0)
 
     def on_button(self, event=None):
         global id
         global loginPass
+        global period
         id = self.entry.get()
         loginPass = self.entry2.get()
+        period = self.entry3.get()
         if self.var.get():
             loginFile = open("loginFile.txt", 'w')
             loginFile.write(id)
@@ -66,6 +75,8 @@ class Login(tk.Tk):
         self.on_button()
 
 
+
+
 login = Login()
 login.title("Student Portal")
 x = Frame(height=100, width=300, background='#6f6f6f')
@@ -73,6 +84,8 @@ x = Frame(height=100, width=300, background='#6f6f6f')
 x.grid()
 login.configure(background='#6f6f6f')
 login.mainloop()
+
+
 
 clear = lambda: os.system('cls')
 os.system("cls")
@@ -111,7 +124,9 @@ if browser.find_element_by_xpath("//*[@id='chk_Assignments']").is_selected() == 
 
 time.sleep(1)
 
-printer = browser.find_element_by_xpath("//*[@id='tblassign_1']/thead/tr[2]/td/a/img")
+per = "period" + str(period)
+tbl = "//*[@id='tblassign_" + str(period) + "']/thead/tr[2]/td/a/img"
+printer = browser.find_element_by_xpath(tbl)
 printer.click()
 
 time.sleep(1)
@@ -133,7 +148,7 @@ saveas.perform()
 
 time.sleep(1)
 
-pyautogui.typewrite('period1')
+pyautogui.typewrite(per)
 time.sleep(1)
 pyautogui.hotkey('f4')
 pyautogui.hotkey('ctrl', 'a')
@@ -147,6 +162,10 @@ time.sleep(3)
 pyautogui.hotkey('ctrl', 'w')
 pyautogui.hotkey('ctrl', 'w')
 os.system('taskkill /F /IM chromedriver.exe')
+
+time.sleep(1)
+
+tabula.convert_into("C:/Users/PotatoPC/Documents/" + per + ".pdf", per + ".csv", output_format="csv")
 
 # # Table 1
 #
@@ -206,9 +225,3 @@ os.system('taskkill /F /IM chromedriver.exe')
 # with open("period_5.csv", "w") as resultFile:
 #     writer = csv.writer(resultFile, dialect='excel', delimiter=' ')
 #     writer.writerows(periodFiveElements)
-
-
-
-
-
-
